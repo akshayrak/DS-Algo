@@ -102,20 +102,39 @@ class Node{
       unshift(){
           return this.remove(0)
       }
-  }
+      get(i){
+          if(i>=this.length||i<0) return undefined
+          let current = this.head
+          for(let j=0;j<i;j++){
+              current=current.next
+          }
+          return current.val
+      }
+      set(i,val){
+          if(i>=this.length||i<0) return undefined
+          let current = this.head
+          for(let j=0;j<i;j++){
+              current=current.next
+          }
+          current.val=val
+          return this.traverse()
+      }
+}
   
   let list = new singlyLinkedList()
   list.push("apple")
   list.push("orange")
-  list.push("graphs")
+  list.push("grapes")
   list.push("mangos")
   list.push("jackfruit")
   console.log(list.pop())
   list.insert("lemon",0)
-  list.push("graps")
+  list.push("grapes")
   console.log(list.remove(0))
   console.log(list.remove(2))
   list.traverse()
   console.log(list.unshift())
+  list.insert("dragonfruit",0)
   list.shift("jackfruit")
-  
+  console.log(list.get(3))
+  list.set(4,"pineApple") 

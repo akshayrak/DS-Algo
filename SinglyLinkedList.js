@@ -1,0 +1,121 @@
+class Node{
+    constructor(val){
+      this.val=val
+      this.next=null
+    }
+  }
+  class singlyLinkedList{
+    constructor(){
+      this.head=null
+      this.tail=null
+      this.length=0
+    }
+    push(val){
+      let newNode = new Node(val)
+      if(this.head==null){
+        this.head=newNode
+        this.tail=newNode
+      }else{
+        this.tail.next=newNode
+        this.tail=newNode
+      }
+      this.length++
+      return this.traverse()
+    }
+    traverse(){
+        let current = this.head
+        console.log("============================================================")
+        while(current){
+            console.log(current.val)
+            current=current.next
+        }
+        console.log("============================================================")
+  
+    }
+      pop(){
+          if(this.head==null)return undefined
+          let current=this.head
+          let previous=this.head
+          if(this.length==1){
+              this.head=null
+              this.tail=null
+              return current.val
+          }
+          while(current.next){
+              previous=current
+              current=current.next
+  
+          }
+          this.tail=previous
+          this.tail.next=null
+          this.length--
+          return current.val
+      }
+      remove(i){
+          if(i>this.length-1) return undefined
+          if(i==this.length-1){
+              return this.pop()
+          }
+          let current=this.head
+          let previous=current
+          let next=current.next
+          if(i==0){
+              this.head=next
+              this.length--
+              return current.val
+          }
+          for(let j=0;j<i;j++){
+              previous=current
+              current=current.next
+              next=current.next
+          }
+          previous.next=next
+          this.length--
+          return current.val
+      }
+      insert(val,i){
+          let newNode = new Node(val)
+          if(i>this.length||i<0) return undefined
+          if(i==this.length){
+              return this.push(val)
+          }
+          if(i==0){
+              newNode.next=this.head
+              this.head=newNode
+              this.length++
+              return this.traverse()
+          }
+          let current=this.head
+          let next=current.next
+          for(let j=0;j<i-1;j++){
+              current=next
+              next=current.next
+          }
+          current.next=newNode
+          newNode.next=next
+          this.length++
+          return this.traverse()
+      }
+      shift(val){
+          return this.insert(val,0)
+      }
+      unshift(){
+          return this.remove(0)
+      }
+  }
+  
+  let list = new singlyLinkedList()
+  list.push("apple")
+  list.push("orange")
+  list.push("graphs")
+  list.push("mangos")
+  list.push("jackfruit")
+  console.log(list.pop())
+  list.insert("lemon",0)
+  list.push("graps")
+  console.log(list.remove(0))
+  console.log(list.remove(2))
+  list.traverse()
+  console.log(list.unshift())
+  list.shift("jackfruit")
+  

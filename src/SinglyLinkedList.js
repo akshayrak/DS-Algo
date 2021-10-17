@@ -119,6 +119,20 @@ class Node{
           current.val=val
           return this.traverse()
       }
+      reverse(){
+        let current=this.head
+        this.head=this.tail
+        this.tail=current
+        let previous=null
+        let next;
+        for(let i=0;i<this.length;i++){
+          next=current.next
+          current.next=previous
+          previous=current
+          current=next
+        }
+        return this.traverse()
+     }
 }
   
   let list = new singlyLinkedList()
@@ -138,3 +152,5 @@ class Node{
   list.shift("jackfruit")
   console.log(list.get(3))
   list.set(4,"pineApple") 
+  console.log("===========reverse================")
+  list.reverse()

@@ -22,5 +22,5 @@
             temp[nums[i]]=1
         }
     }
-    return false 
+    return false
 };
